@@ -1,0 +1,66 @@
+body {
+    background-color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.btn-reload {
+    float: right;
+}
+
+.country-bar-charts-container {
+    padding: 32px 8px 64px;
+}
+
+.country-bar-charts-container h2 {
+    text-align: center;
+    margin-bottom: 0;
+    color: #333;
+}
+
+.country-bar-charts-container h2+h3 {
+    text-align: center;
+    margin-top: 0;
+    color: #333;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.country-bar-chart h3 {
+    font-size: 16px;
+    margin-top: 32px;
+    margin-bottom: 0;
+    margin-left: 54px;
+    /* text-align: center; */
+    font-weight: 400;
+    /* color: #444; */
+}
+
+.country-bar-chart__chart {
+    margin: 0 auto 0 0;
+}
+
+.ct-series-a .ct-area {
+    fill: #1b6ac9;
+}
+
+.ct-series-a .ct-line {
+    stroke: #1b6ac9;
+    stroke-width: 1px;
+    stroke-linecap: round;
+}
+
+.ct-series-a .ct-point {
+    stroke: #1b6ac9;
+    stroke-width: 5px;
+    stroke-linecap: round;
+}
+
+.ct-grid.ct-vertical {
+    stroke: #ccc;
+    stroke-width: 1px;
+    stroke-dasharray: 0px;
+}
+
+.ct-label {
+    color: #777;
+}
