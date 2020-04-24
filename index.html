@@ -8,11 +8,19 @@
     <script src="chartist.js"></script>
     <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
-    <title>Charting Corona</title>
+    <title>Charting Corona for Sweden</title>
 </head>
 
 <body>
-    <button id="btnUpdateState" class="btn-reload">Reload</button>
+    <button id="btnUpdateState" class="btn-reload">Update data</button>
+    <header>
+        <h1>Sweden and neighbors</h1>
+        <h2>Reported Corona Deaths / 10 million / Day</h2>
+        <p>Starting at total 2 reported</p>
+        <p>13 days rolling average (11-9-7-5-3 at tailing edge)</p>
+        <p>Data: <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a></p>
+        <p>Source: <a href="https://github.com/ekmwest/charting-corona">charting-corona</a></p>
+    </header>
     <div id="countryBarCharts" class="country-bar-charts-container"></div>
 </body>
 

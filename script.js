@@ -1,17 +1,18 @@
 //const source = '/time_series_covid19_deaths_global.csv';
 const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv';
 
-const countries = ['Latvia', 'Estonia', 'Lithuania', 'Finland', 'Denmark', 'Norway', 'Poland', 'Sweden'];
+const countries = ['Latvia', 'Finland', 'Poland', 'Estonia', 'Denmark', 'Sweden', 'Lithuania', 'Norway', 'Germany'];
 
 const populations = { // 10s of millions
     Sweden: 1,
-    Norway: 0.5,
-    Finland: 0.5,
-    Denmark: 0.56,
+    Norway: 0.54,
+    Finland: 0.55,
+    Denmark: 0.58,
     Estonia: 0.13,
     Poland: 3.8,
     Latvia: 0.19,
-    Lithuania: 0.28
+    Lithuania: 0.28,
+    Germany: 8.3
 };
 
 window.onload = load;
@@ -19,7 +20,6 @@ window.onload = load;
 document.getElementById('btnUpdateState').onclick = updateState;
 
 function load() {
-    console.log('load()');
     if (getState() === null) {
         updateState();
     } else {
@@ -129,28 +129,10 @@ function rollingThirteenDaysAverages(inputCountries) {
 }
 
 function run() {
-    console.log('run()');
-
     const state = getState();
 
     const countryBarChartsContainer = document.getElementById('countryBarCharts');
     countryBarChartsContainer.innerHTML = '';
-
-    const countryBarChartsTitleElement = document.createElement('h2');
-    countryBarChartsTitleElement.innerText = 'Reported deaths / 10 million / Day';
-    countryBarChartsContainer.appendChild(countryBarChartsTitleElement);
-
-    const countryBarChartsSubTitleElement = document.createElement('h3');
-    countryBarChartsSubTitleElement.innerText = 'Starting at total 2 reported';
-    countryBarChartsContainer.appendChild(countryBarChartsSubTitleElement);
-
-    const subsub = document.createElement('h3');
-    subsub.innerText = '13 days rolling average (11-9-7-5-3 at the edge)';
-    countryBarChartsContainer.appendChild(subsub);
-
-    const subsubsub = document.createElement('h3');
-    subsubsub.innerHTML = 'Data: <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a>';
-    countryBarChartsContainer.appendChild(subsubsub);
 
     state.forEach(item => {
         createCountryBarChart(item, countryBarChartsContainer);
