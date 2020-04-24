@@ -1,19 +1,17 @@
 //const source = '/time_series_covid19_deaths_global.csv';
 const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv';
 
-const countries = ['Finland', 'Denmark', 'Norway', 'Sweden', 'Germany', 'United Kingdom', 'US', 'Italy'];
+const countries = ['Latvia', 'Estonia', 'Lithuania', 'Finland', 'Denmark', 'Norway', 'Poland', 'Sweden'];
 
 const populations = { // 10s of millions
     Sweden: 1,
-    Italy: 6,
     Norway: 0.5,
     Finland: 0.5,
-    France: 6.7,
-    Germany: 8.3,
-    Iran: 8.1,
-    'United Kingdom': 6.6,
-    US: 33,
-    Denmark: 0.56
+    Denmark: 0.56,
+    Estonia: 0.13,
+    Poland: 3.8,
+    Latvia: 0.19,
+    Lithuania: 0.28
 };
 
 window.onload = load;
@@ -151,10 +149,8 @@ function run() {
     countryBarChartsContainer.appendChild(subsub);
 
     const subsubsub = document.createElement('h3');
-    subsubsub.innerHTML = 'Source: <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a>';
+    subsubsub.innerHTML = 'Data: <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a>';
     countryBarChartsContainer.appendChild(subsubsub);
-
-    //https://github.com/CSSEGISandData/COVID-19
 
     state.forEach(item => {
         createCountryBarChart(item, countryBarChartsContainer);
@@ -176,7 +172,7 @@ function createCountryBarChart(country, container) {
 
     const deathsPerDayArr = deathsPerDay(country.serie);
     const normalizedDeathsPerDayArr = deathsPerDayArr.map(x => Math.floor(x / populations[country.country]));
-    const pixelWidth = 65 + 7 * deathsPerDayArr.length;
+    const pixelWidth = 65 + 8 * deathsPerDayArr.length;
 
     chartElement.style.width = `${pixelWidth}px`;
 
