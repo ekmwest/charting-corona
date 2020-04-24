@@ -1,10 +1,9 @@
-//const source = '/time_series_covid19_deaths_global.csv';
 const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv';
 
 const countries = ['Latvia', 'Finland', 'Poland', 'Estonia', 'Denmark', 'Sweden', 'Lithuania', 'Norway', 'Germany'];
 
-const populations = { // 10s of millions
-    Sweden: 1,
+const populations = { // 10s of millions with 2 digits precision
+    Sweden: 1.0,
     Norway: 0.54,
     Finland: 0.55,
     Denmark: 0.58,
@@ -17,15 +16,22 @@ const populations = { // 10s of millions
 
 window.onload = load;
 
-document.getElementById('btnUpdateState').onclick = updateState;
+let timeout = null;
+window.onresize = () => {
+    if (timeout) clearTimeout(timeout);
+    timeout = window.setTimeout(load, 500);
+};
 
 function load() {
+    timeout = null;
     if (getState() === null) {
         updateState();
     } else {
         run();
     }
 }
+
+document.getElementById('btnUpdateState').onclick = updateState;
 
 function updateState(cb) {
     console.log('updateState()');
@@ -128,7 +134,22 @@ function rollingThirteenDaysAverages(inputCountries) {
     return outputCountries;
 }
 
+let chartWidthScale = 6;
+
 function run() {
+    if (document.documentElement.clientWidth > 768) {
+        console.log('width > 768');
+        chartWidthScale = document.documentElement.clientWidth / 180;
+    } else if (document.documentElement.clientWidth < 667) {
+        console.log('667 < width');
+        chartWidthScale = document.documentElement.clientWidth / 60;
+    } else {
+        console.log('667 < width < 768');
+        chartWidthScale = document.documentElement.clientWidth / 120;
+    }
+
+    console.log('chartWidthScale: ' + chartWidthScale);
+
     const state = getState();
 
     const countryBarChartsContainer = document.getElementById('countryBarCharts');
@@ -154,7 +175,7 @@ function createCountryBarChart(country, container) {
 
     const deathsPerDayArr = deathsPerDay(country.serie);
     const normalizedDeathsPerDayArr = deathsPerDayArr.map(x => Math.floor(x / populations[country.country]));
-    const pixelWidth = 65 + 8 * deathsPerDayArr.length;
+    const pixelWidth = Math.floor(65 + chartWidthScale * deathsPerDayArr.length);
 
     chartElement.style.width = `${pixelWidth}px`;
 

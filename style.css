@@ -12,7 +12,19 @@ body {
 .country-bar-charts-container {
     display: grid;
     grid-template-columns: 33.333% 33.333% 33.333%;
-    margin: 0 auto;
+    margin: 0 auto 6em;
+}
+
+@media (max-width: 768px) {
+    .country-bar-charts-container {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media (max-width: 667px) {
+    .country-bar-charts-container {
+        grid-template-columns: 100%;
+    }
 }
 
 header {
