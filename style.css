@@ -19,10 +19,22 @@ body {
 
 .country-bar-charts-container h2+h3 {
     text-align: center;
-    margin-top: 0;
+    margin: 0;
     color: #333;
     font-weight: 500;
-    font-style: italic;
+}
+
+.country-bar-charts-container h2+h3+h3 {
+    text-align: center;
+    margin: 0;
+    color: #333;
+    font-weight: 500;
+}
+
+.country-bar-charts-container h2+h3+h3+h3 {
+    text-align: center;
+    margin-top: 0;
+    font-weight: 400;
 }
 
 .country-bar-chart h3 {
@@ -51,7 +63,7 @@ body {
 
 .ct-series-a .ct-point {
     stroke: #1b6ac9;
-    stroke-width: 5px;
+    stroke-width: 4px;
     stroke-linecap: round;
 }
 

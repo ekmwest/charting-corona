@@ -1,7 +1,7 @@
 //const source = '/time_series_covid19_deaths_global.csv';
 const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv';
 
-const countries = ['Sweden', 'Italy', 'Norway', 'Finland', 'France', 'Germany', 'United Kingdom', 'US', 'Denmark'];
+const countries = ['Finland', 'Denmark', 'Norway', 'Sweden', 'Germany', 'United Kingdom', 'US', 'Italy'];
 
 const populations = { // 10s of millions
     Sweden: 1,
@@ -34,8 +34,100 @@ function updateState(cb) {
     fetch(source)
         .then(res => res.text())
         .then(parseCsv)
+        .then(sort)
+        .then(rollingThirteenDaysAverages)
         .then(setState)
         .then(run);
+}
+
+function rollingThirteenDaysAverages(inputCountries) {
+    const outputCountries = [];
+
+    inputCountries.forEach(inputCountry => {
+        const outputCountry = {};
+
+        outputCountry.country = inputCountry.country;
+
+        outputCountry.serie = [];
+
+        for (var i = 0; i < inputCountry.serie.length; i++) {
+            if (i < 6) {
+                outputCountry.serie[i] = inputCountry.serie[i];
+            } else if (i < inputCountry.serie.length - 6) {
+                var thirteenDaySum =
+                    parseInt(inputCountry.serie[i - 6]) +
+                    parseInt(inputCountry.serie[i - 5]) +
+                    parseInt(inputCountry.serie[i - 4]) +
+                    parseInt(inputCountry.serie[i - 3]) +
+                    parseInt(inputCountry.serie[i - 2]) +
+                    parseInt(inputCountry.serie[i - 1]) +
+                    parseInt(inputCountry.serie[i]) +
+                    parseInt(inputCountry.serie[i + 1]) +
+                    parseInt(inputCountry.serie[i + 2]) +
+                    parseInt(inputCountry.serie[i + 3]) +
+                    parseInt(inputCountry.serie[i + 4]) +
+                    parseInt(inputCountry.serie[i + 5]) +
+                    parseInt(inputCountry.serie[i + 6]);
+                outputCountry.serie[i] = thirteenDaySum / 13;
+            } else if (i < inputCountry.serie.length - 5) {
+                var elevenDaySum =
+                    parseInt(inputCountry.serie[i - 5]) +
+                    parseInt(inputCountry.serie[i - 4]) +
+                    parseInt(inputCountry.serie[i - 3]) +
+                    parseInt(inputCountry.serie[i - 2]) +
+                    parseInt(inputCountry.serie[i - 1]) +
+                    parseInt(inputCountry.serie[i]) +
+                    parseInt(inputCountry.serie[i + 1]) +
+                    parseInt(inputCountry.serie[i + 2]) +
+                    parseInt(inputCountry.serie[i + 3]) +
+                    parseInt(inputCountry.serie[i + 4]) +
+                    parseInt(inputCountry.serie[i + 5]);
+                outputCountry.serie[i] = elevenDaySum / 11;
+            } else if (i < inputCountry.serie.length - 4) {
+                var nineDaySum =
+                    parseInt(inputCountry.serie[i - 4]) +
+                    parseInt(inputCountry.serie[i - 3]) +
+                    parseInt(inputCountry.serie[i - 2]) +
+                    parseInt(inputCountry.serie[i - 1]) +
+                    parseInt(inputCountry.serie[i]) +
+                    parseInt(inputCountry.serie[i + 1]) +
+                    parseInt(inputCountry.serie[i + 2]) +
+                    parseInt(inputCountry.serie[i + 3]) +
+                    parseInt(inputCountry.serie[i + 4]);
+                outputCountry.serie[i] = nineDaySum / 9;
+            } else if (i < inputCountry.serie.length - 3) {
+                var sevenDaySum =
+                    parseInt(inputCountry.serie[i - 3]) +
+                    parseInt(inputCountry.serie[i - 2]) +
+                    parseInt(inputCountry.serie[i - 1]) +
+                    parseInt(inputCountry.serie[i]) +
+                    parseInt(inputCountry.serie[i + 1]) +
+                    parseInt(inputCountry.serie[i + 2]) +
+                    parseInt(inputCountry.serie[i + 3]);
+                outputCountry.serie[i] = sevenDaySum / 7;
+            } else if (i < inputCountry.serie.length - 2) {
+                var fiveDaySum =
+                    parseInt(inputCountry.serie[i - 2]) +
+                    parseInt(inputCountry.serie[i - 1]) +
+                    parseInt(inputCountry.serie[i]) +
+                    parseInt(inputCountry.serie[i + 1]) +
+                    parseInt(inputCountry.serie[i + 2]);
+                outputCountry.serie[i] = fiveDaySum / 5;
+            } else if (i < inputCountry.serie.length - 1) {
+                var threeDaySum =
+                    parseInt(inputCountry.serie[i - 1]) +
+                    parseInt(inputCountry.serie[i]) +
+                    parseInt(inputCountry.serie[i + 1]);
+                outputCountry.serie[i] = threeDaySum / 3;
+            } else {
+                outputCountry.serie[i] = inputCountry.serie[i];
+            }
+        }
+
+        outputCountries.push(outputCountry);
+    });
+
+    return outputCountries;
 }
 
 function run() {
@@ -47,12 +139,22 @@ function run() {
     countryBarChartsContainer.innerHTML = '';
 
     const countryBarChartsTitleElement = document.createElement('h2');
-    countryBarChartsTitleElement.innerText = 'Deaths / 10 million / Day';
+    countryBarChartsTitleElement.innerText = 'Reported deaths / 10 million / Day';
     countryBarChartsContainer.appendChild(countryBarChartsTitleElement);
 
     const countryBarChartsSubTitleElement = document.createElement('h3');
-    countryBarChartsSubTitleElement.innerText = 'Starting at total of 2 dead';
+    countryBarChartsSubTitleElement.innerText = 'Starting at total 2 reported';
     countryBarChartsContainer.appendChild(countryBarChartsSubTitleElement);
+
+    const subsub = document.createElement('h3');
+    subsub.innerText = '13 days rolling average (11-9-7-5-3 at the edge)';
+    countryBarChartsContainer.appendChild(subsub);
+
+    const subsubsub = document.createElement('h3');
+    subsubsub.innerHTML = 'Source: <a href="https://github.com/CSSEGISandData/COVID-19">Johns Hopkins CSSE</a>';
+    countryBarChartsContainer.appendChild(subsubsub);
+
+    //https://github.com/CSSEGISandData/COVID-19
 
     state.forEach(item => {
         createCountryBarChart(item, countryBarChartsContainer);
@@ -74,7 +176,7 @@ function createCountryBarChart(country, container) {
 
     const deathsPerDayArr = deathsPerDay(country.serie);
     const normalizedDeathsPerDayArr = deathsPerDayArr.map(x => Math.floor(x / populations[country.country]));
-    const pixelWidth = 65 + 20 * deathsPerDayArr.length;
+    const pixelWidth = 65 + 7 * deathsPerDayArr.length;
 
     chartElement.style.width = `${pixelWidth}px`;
 
@@ -84,16 +186,20 @@ function createCountryBarChart(country, container) {
     };
 
     let options = {
-        high: 200,
+        high: 150,
+        low: 0,
         lineSmooth: false,
-        showGridBackground: true,
+        showGridBackground: false,
         showArea: true,
         axisX: {
             labelOffset: {
                 x: -4,
                 y: 0
             },
-            showGrid: false
+            showGrid: false,
+            labelInterpolationFnc: function (value, index) {
+                return index % 5 === 0 ? index : null;
+            }
         },
         axisY: {
             labelOffset: {
@@ -124,9 +230,17 @@ function deathsPerDay(serie) {
 function createLabels(serie) {
     let labels = [];
     for (let i = 0; i < serie.length; i++) {
-        labels.push(i+1);
+        labels.push(i + 1);
     }
     return labels;
+}
+
+function sort(data) {
+    const sorted = [];
+    countries.forEach(country => {
+        sorted.push(data.find(item => item.country === country));
+    })
+    return sorted;
 }
 
 function parseCsv(csv) {
