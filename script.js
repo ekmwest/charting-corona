@@ -138,17 +138,12 @@ let chartWidthScale = 6;
 
 function run() {
     if (document.documentElement.clientWidth > 768) {
-        console.log('width > 768');
         chartWidthScale = document.documentElement.clientWidth / 180;
     } else if (document.documentElement.clientWidth < 667) {
-        console.log('667 < width');
         chartWidthScale = document.documentElement.clientWidth / 60;
     } else {
-        console.log('667 < width < 768');
         chartWidthScale = document.documentElement.clientWidth / 120;
     }
-
-    console.log('chartWidthScale: ' + chartWidthScale);
 
     const state = getState();
 
@@ -161,8 +156,6 @@ function run() {
 }
 
 function createCountryBarChart(country, container) {
-    console.log('createCountryBarChart()');
-
     let countryElement = document.createElement('div');
     countryElement.className = 'country-bar-chart';
     container.appendChild(countryElement);
