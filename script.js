@@ -138,11 +138,11 @@ let chartWidthScale = 6;
 
 function run() {
     if (document.documentElement.clientWidth > 768) {
-        chartWidthScale = document.documentElement.clientWidth / 180;
+        chartWidthScale = document.documentElement.clientWidth / 220;
     } else if (document.documentElement.clientWidth < 667) {
-        chartWidthScale = document.documentElement.clientWidth / 60;
+        chartWidthScale = document.documentElement.clientWidth / 100;
     } else {
-        chartWidthScale = document.documentElement.clientWidth / 120;
+        chartWidthScale = document.documentElement.clientWidth / 180;
     }
 
     const state = getState();
