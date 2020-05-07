@@ -135,8 +135,13 @@ function rollingThirteenDaysAverages(inputCountries) {
 }
 
 let chartWidthScale = 6;
+let cachedClientWidth = 0;
 
 function run() {
+    if(cachedClientWidth === document.documentElement.clientWidth) {
+        return;
+    }
+
     if (document.documentElement.clientWidth > 768) {
         chartWidthScale = document.documentElement.clientWidth / 220;
     } else if (document.documentElement.clientWidth < 667) {
