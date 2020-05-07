@@ -142,6 +142,8 @@ function run() {
         return;
     }
 
+    cachedClientWidth = document.documentElement.clientWidth
+
     if (document.documentElement.clientWidth > 768) {
         chartWidthScale = document.documentElement.clientWidth / 220;
     } else if (document.documentElement.clientWidth < 667) {
