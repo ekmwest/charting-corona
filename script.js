@@ -41,7 +41,7 @@ function updateState(cb) {
         .then(sort)
         .then(rollingThirteenDaysAverages)
         .then(setState)
-        .then(run);
+        .then(() => run(true));
 }
 
 function rollingThirteenDaysAverages(inputCountries) {
@@ -137,12 +137,12 @@ function rollingThirteenDaysAverages(inputCountries) {
 let chartWidthScale = 6;
 let cachedClientWidth = 0;
 
-function run() {
-    if(cachedClientWidth === document.documentElement.clientWidth) {
+function run(force = false) {
+    if (!force && cachedClientWidth === document.documentElement.clientWidth) {
         return;
     }
 
-    cachedClientWidth = document.documentElement.clientWidth
+    cachedClientWidth = document.documentElement.clientWidth;
 
     if (document.documentElement.clientWidth > 768) {
         chartWidthScale = document.documentElement.clientWidth / 220;
