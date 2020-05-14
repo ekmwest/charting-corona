@@ -75,7 +75,7 @@ header p {
 
 .ct-series-a .ct-point {
     stroke: #1b6ac9;
-    stroke-width: 3px;
+    stroke-width: 1px;
     stroke-linecap: round;
 }
 
@@ -86,5 +86,6 @@ header p {
 }
 
 .ct-label {
-    color: #777;
+    color: #555;
+    font-size: 10px;
 }

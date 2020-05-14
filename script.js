@@ -124,7 +124,8 @@ function rollingThirteenDaysAverages(inputCountries) {
                     parseInt(inputCountry.serie[i + 1]);
                 outputCountry.serie[i] = threeDaySum / 3;
             } else {
-                outputCountry.serie[i] = inputCountry.serie[i];
+                // Skip tail edge
+                // outputCountry.serie[i] = inputCountry.serie[i];
             }
         }
 
@@ -143,9 +144,10 @@ function run(force = false) {
     }
 
     cachedClientWidth = document.documentElement.clientWidth;
+    console.log('cachedClientWidth: ' + cachedClientWidth);
 
     if (document.documentElement.clientWidth > 768) {
-        chartWidthScale = document.documentElement.clientWidth / 220;
+        chartWidthScale = document.documentElement.clientWidth / 280;
     } else if (document.documentElement.clientWidth < 667) {
         chartWidthScale = document.documentElement.clientWidth / 100;
     } else {
