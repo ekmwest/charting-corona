@@ -61,6 +61,8 @@ header p {
 
 .country-bar-chart__chart {
     margin: 0 auto;
+    padding: 32px 0;
+    height: 200px;
 }
 
 .ct-series-a .ct-area {

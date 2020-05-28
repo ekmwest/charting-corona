@@ -187,7 +187,7 @@ function createCountryBarChart(country, container) {
     };
 
     let options = {
-        high: 150,
+        high: 100,
         low: 0,
         lineSmooth: false,
         showGridBackground: false,
@@ -206,6 +206,9 @@ function createCountryBarChart(country, container) {
             labelOffset: {
                 x: 0,
                 y: 5
+            },
+            labelInterpolationFnc: function (value) {
+                return value % 50 === 0 ? value : null;
             }
         }
     };
