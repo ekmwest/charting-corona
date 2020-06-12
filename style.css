@@ -56,12 +56,12 @@ header p {
     margin-top: 32px;
     margin-bottom: 0;
     margin-left: 54px;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .country-bar-chart__chart {
     margin: 0 auto;
-    padding: 32px 0;
+    padding: 64px 0 32px;
     height: 200px;
 }
 

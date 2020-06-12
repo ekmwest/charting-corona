@@ -147,11 +147,11 @@ function run(force = false) {
     console.log('cachedClientWidth: ' + cachedClientWidth);
 
     if (document.documentElement.clientWidth > 768) {
-        chartWidthScale = document.documentElement.clientWidth / 280;
+        chartWidthScale = document.documentElement.clientWidth / 400;
     } else if (document.documentElement.clientWidth < 667) {
-        chartWidthScale = document.documentElement.clientWidth / 100;
+        chartWidthScale = document.documentElement.clientWidth / 120;
     } else {
-        chartWidthScale = document.documentElement.clientWidth / 180;
+        chartWidthScale = document.documentElement.clientWidth / 300;
     }
 
     const state = getState();
@@ -189,7 +189,7 @@ function createCountryBarChart(country, container) {
     let options = {
         high: 100,
         low: 0,
-        lineSmooth: false,
+        lineSmooth: true,
         showGridBackground: false,
         showArea: true,
         axisX: {
@@ -199,7 +199,7 @@ function createCountryBarChart(country, container) {
             },
             showGrid: false,
             labelInterpolationFnc: function (value, index) {
-                return index % 5 === 0 ? index : null;
+                return index % 10 === 0 ? index : null;
             }
         },
         axisY: {
