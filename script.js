@@ -148,10 +148,13 @@ function run(force = false) {
 
     if (document.documentElement.clientWidth > 768) {
         chartWidthScale = document.documentElement.clientWidth / 400;
+        chartWidthScale = document.documentElement.clientWidth / 600;
     } else if (document.documentElement.clientWidth < 667) {
         chartWidthScale = document.documentElement.clientWidth / 120;
+        chartWidthScale = document.documentElement.clientWidth / 160;
     } else {
         chartWidthScale = document.documentElement.clientWidth / 300;
+        chartWidthScale = document.documentElement.clientWidth / 380;
     }
 
     const state = getState();
@@ -199,7 +202,8 @@ function createCountryBarChart(country, container) {
             },
             showGrid: false,
             labelInterpolationFnc: function (value, index) {
-                return index % 10 === 0 ? index : null;
+                // return index % 10 === 0 ? index : null;
+                return value % 20 === 0 ? value : null;
             }
         },
         axisY: {
@@ -208,7 +212,7 @@ function createCountryBarChart(country, container) {
                 y: 5
             },
             labelInterpolationFnc: function (value) {
-                return value % 50 === 0 ? value : null;
+                return value % 25 === 0 ? value : null;
             }
         }
     };
