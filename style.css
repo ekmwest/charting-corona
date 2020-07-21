@@ -57,8 +57,8 @@ header h1 {
 }
 
 header h2 {
-    margin: 0 0 1.4em;
-    font-size: 1.2em;
+    margin: 0 0 1.8em;
+    font-size: 1.4em;
     font-style: italic;
     font-weight: 600;
     color: #000;
@@ -73,8 +73,9 @@ header p {
     font-size: 16px;
     margin-top: 32px;
     margin-bottom: 0;
-    margin-left: 54px;
-    font-weight: 500;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
 }
 
 .country-bar-chart__chart {
