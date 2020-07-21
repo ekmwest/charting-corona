@@ -147,13 +147,10 @@ function run(force = false) {
     console.log('cachedClientWidth: ' + cachedClientWidth);
 
     if (document.documentElement.clientWidth > 768) {
-        chartWidthScale = document.documentElement.clientWidth / 400;
         chartWidthScale = document.documentElement.clientWidth / 600;
     } else if (document.documentElement.clientWidth < 667) {
-        chartWidthScale = document.documentElement.clientWidth / 120;
-        chartWidthScale = document.documentElement.clientWidth / 160;
+        chartWidthScale = document.documentElement.clientWidth / 200;
     } else {
-        chartWidthScale = document.documentElement.clientWidth / 300;
         chartWidthScale = document.documentElement.clientWidth / 380;
     }
 
