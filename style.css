@@ -6,12 +6,13 @@ body {
 .btn-reload,
 .btn-reload:focus,
 .btn-reload:active {
-    display: block;
+    display: flex;
+    align-items: center;
     margin: 32px auto;
     background-color: #2ea44f;
     color: #fff;
     border: 0;
-    padding: 12px 24px;
+    padding: 8px 26px;
     border-radius: 7px;
     font-weight: 600;
     font-size: 16px;
@@ -22,6 +23,10 @@ body {
 
 .btn-reload:active {
     background-color: green;
+}
+
+.btn-reload span {
+    margin-left: 12px;
 }
 
 .country-bar-charts-container {
@@ -44,21 +49,21 @@ body {
 
 header {
     text-align: center;
-    margin: 0 0 2em;
+    margin: 0 0 1em;
 }
 
 header h1 {
-    margin: 0 0 .8em;
+    margin: 0 0 .6em;
     color: #333;
-    font-size: 3em;
+    font-size: 2em;
     line-height: 1em;
 }
 
 header h2 {
-    margin: 0 0 1.8em;
-    font-size: 1.4em;
+    margin: 0 0 1em;
+    font-size: 1.2em;
     font-style: italic;
-    font-weight: 600;
+    font-weight: bold;
     color: #000;
 }
 

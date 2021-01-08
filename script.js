@@ -1,17 +1,20 @@
 const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv';
 
-const countries = ['Latvia', 'Finland', 'Poland', 'Estonia', 'Denmark', 'Sweden', 'Lithuania', 'Norway', 'Germany'];
+const countries = ['Sweden', 'Finland', 'Ireland', 'Greece', 'Slovakia', 'Japan', 'Estonia', 'Denmark',  'Norway', 'Germany', 'Belarus', 'New Zealand'];
 
 const populations = { // 10s of millions with 2 digits precision
     Sweden: 1.0,
     Norway: 0.54,
     Finland: 0.55,
+    Ireland: 4.9,
     Denmark: 0.58,
     Estonia: 0.13,
-    Poland: 3.8,
-    Latvia: 0.19,
-    Lithuania: 0.28,
-    Germany: 8.3
+    Germany: 8.3,
+    Slovakia: 5.5,
+    Japan: 130,
+    Greece: 11,
+    Belarus: 9.5,
+    'New Zealand': 4.9
 };
 
 window.onload = load;
@@ -147,11 +150,11 @@ function run(force = false) {
     console.log('cachedClientWidth: ' + cachedClientWidth);
 
     if (document.documentElement.clientWidth > 768) {
-        chartWidthScale = document.documentElement.clientWidth / 900;
+        chartWidthScale = document.documentElement.clientWidth / 1300;
     } else if (document.documentElement.clientWidth < 667) {
-        chartWidthScale = document.documentElement.clientWidth / 300;
+        chartWidthScale = document.documentElement.clientWidth / 400;
     } else {
-        chartWidthScale = document.documentElement.clientWidth / 600;
+        chartWidthScale = document.documentElement.clientWidth / 800;
     }
 
     const state = getState();
@@ -200,7 +203,7 @@ function createCountryBarChart(country, container) {
             showGrid: false,
             labelInterpolationFnc: function (value, index) {
                 // return index % 10 === 0 ? index : null;
-                return value % 20 === 0 ? value : null;
+                return value % 50 === 0 ? value : null;
             }
         },
         axisY: {
