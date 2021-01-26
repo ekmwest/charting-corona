@@ -1,6 +1,6 @@
 const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv';
 
-const countries = ['Sweden', 'Finland', 'Ireland', 'Greece', 'Slovakia', 'Japan', 'Estonia', 'Denmark',  'Norway', 'Germany', 'Belarus', 'New Zealand'];
+const countries = ['Sweden', 'Finland', 'Ireland', 'Greece', 'Slovakia', 'Japan', 'Estonia', 'Denmark', 'Norway', 'Germany', 'Belarus', 'New Zealand'];
 
 const populations = { // 10s of millions with 2 digits precision
     Sweden: 1.0,
@@ -190,7 +190,7 @@ function createCountryBarChart(country, container) {
     };
 
     let options = {
-        high: 100,
+        high: 120,
         low: 0,
         lineSmooth: true,
         showGridBackground: false,
