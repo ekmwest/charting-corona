@@ -1,20 +1,20 @@
 const source = 'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv';
 
-const countries = ['Sweden', 'Finland', 'Ireland', 'Greece', 'Slovakia', 'Japan', 'Estonia', 'Denmark', 'Norway', 'Germany', 'Belarus', 'New Zealand'];
+const countries = ['Sweden', 'Belarus', 'Finland', 'Denmark', 'Norway', 'Ireland', 'Greece', 'Slovakia', 'Japan', 'Estonia',  'Germany',  'New Zealand'];
 
 const populations = { // 10s of millions with 2 digits precision
     Sweden: 1.0,
     Norway: 0.54,
     Finland: 0.55,
-    Ireland: 4.9,
+    Ireland: 0.49,
     Denmark: 0.58,
     Estonia: 0.13,
     Germany: 8.3,
-    Slovakia: 5.5,
-    Japan: 130,
-    Greece: 11,
-    Belarus: 9.5,
-    'New Zealand': 4.9
+    Slovakia: 0.55,
+    Japan: 13,
+    Greece: 1.1,
+    Belarus: 0.95,
+    'New Zealand': 0.49
 };
 
 window.onload = load;
@@ -179,6 +179,7 @@ function createCountryBarChart(country, container) {
     countryElement.appendChild(chartElement);
 
     const deathsPerDayArr = deathsPerDay(country.serie);
+    let foo = populations[country.country];
     const normalizedDeathsPerDayArr = deathsPerDayArr.map(x => Math.floor(x / populations[country.country]));
     const pixelWidth = Math.floor(65 + chartWidthScale * deathsPerDayArr.length);
 
